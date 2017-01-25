@@ -4,20 +4,14 @@ FROM python:2.7-slim
 # Set the application directory
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y r-base
-
-RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile
-RUN Rscript -e "install.packages('rpart.plot')"
-RUN Rscript -e "install.packages('pROC')"
-RUN Rscript -e "install.packages('ggplot2')"
-RUN Rscript -e "install.packages('biglm')"
+RUN apt-get update \
+ && apt-get install -y r-base \
+ && echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile \
+ && Rscript -e "install.packages('biglm')"
 
 # Install our requirements.txt
-RUN pip install numpy
-RUN pip install pandas
-RUN pip install rpy2
-RUN pip install flask-restplus
+ADD requirements.txt /app/requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy our code from the current folder to /app inside the container
 ADD . /app
