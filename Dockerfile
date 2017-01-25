@@ -14,6 +14,7 @@ RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('biglm')"
 
 # Install our requirements.txt
+RUN pip install numpy
 RUN pip install rpy2
 RUN pip install flask-restplus
 
