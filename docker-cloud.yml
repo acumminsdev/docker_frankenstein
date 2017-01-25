@@ -1,0 +1,5 @@
+web:
+  image: mndrake/docker-frankenstein
+  ports:
+    - "5000"
+

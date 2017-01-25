@@ -9,3 +9,10 @@ RUN Rscript -e "install.packages('biglm')"
 
 #setup python
 RUN pip install rpy2
+RUN pip install flask-restplus
+
+COPY model.rds /home/jovyan/model.rds
+COPY app.py /home/jovyan/app.py
+
+EXPOSE 5000
+CMD python /home/jovyan/app.py

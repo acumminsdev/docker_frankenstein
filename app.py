@@ -37,7 +37,7 @@ class TitanicApi(Resource):
        df = pd.DataFrame([args])
        model_score = ro.r("""
            library(biglm)
-           model_env <- readRDS('/home/jovyan/model_env.rds')
+           model_env <- readRDS('/home/jovyan/model.rds')
            score <- function(x) model_env$score(model_env$model, x)
            """)
        result = np.array(model_score(df))
