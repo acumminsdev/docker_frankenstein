@@ -22,5 +22,7 @@ EXPOSE 5000
 # Environment Variables
 ENV NAME Titanic
 
+USER 1001
+
 # Define our command to be run when launching the container
 CMD ["python", "app.py"]
