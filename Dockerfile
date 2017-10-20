@@ -27,11 +27,8 @@ RUN yum install -y centos-release-scl-rh && \
 # Set the application directory
 WORKDIR /app
 
-# RUN yum install epel-release -y && \
-#    yum update
-RUN rpm -Uvh 'https://mirrors.rit.edu/fedora/epel/7/x86_64/e/epel-release-7-10.noarch.rpm'
 # Install R and CRAN dependencies
-# RUN rpm -Uvh 'http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm' && \
+RUN rpm -Uvh 'https://mirrors.rit.edu/fedora/epel/7/x86_64/e/epel-release-7-10.noarch.rpm'
 RUN yum install R -y && \
     echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile && \
     Rscript -e "install.packages('biglm')"
