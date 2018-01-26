@@ -3,7 +3,7 @@ FROM centos/s2i-base-centos7
 
 EXPOSE 5000
 
-ENV PYTHON_VERSION=3.6 \
+ENV PYTHON_VERSION=3.5 \
     PATH=$HOME/.local/bin/:$PATH \
     PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8 \
@@ -13,7 +13,7 @@ ENV PYTHON_VERSION=3.6 \
 
 RUN yum install -y centos-release-scl-rh && \
     yum-config-manager --enable centos-sclo-rh-testing && \
-    INSTALL_PKGS="rh-python36 rh-python36-python-devel rh-python36-python-setuptools rh-python36-python-pip \
+    INSTALL_PKGS="rh-python35 rh-python35-python-devel rh-python35-python-setuptools rh-python35-python-pip \
          nss_wrapper httpd24 httpd24-httpd-devel httpd24-mod_ssl httpd24-mod_auth_kerb httpd24-mod_ldap \
          httpd24-mod_session atlas-devel gcc-gfortran libffi-devel libtool-ltdl readline-devel" && \
     yum install -y --setopt=tsflags=nodocs --enablerepo=centosplus $INSTALL_PKGS && \
@@ -42,7 +42,7 @@ COPY ./root/ /
 # Create a Python virtual environment for use by any application to avoid
 # potential conflicts with Python packages preinstalled in the main Python
 # installation.
-RUN source scl_source enable rh-python36 && \
+RUN source scl_source enable rh-python35 && \
     virtualenv /opt/app-root
 
 # In order to drop the root user, we have to make some directories world
